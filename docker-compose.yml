@@ -1,0 +1,31 @@
+services:
+  gamecat-db:
+    image: mysql:8.4
+    container_name: gamecat-banco
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: adm
+      MYSQL_PASSWORD: 12345
+      MYSQL_DATABASE: gamescat
+    ports:
+      - "3306:3306"
+    volumes:
+      - meus_dados:/var/lib/mysql
+      - /database/gamescat.sql:/docker-entrypoint-initdb.d/gamescat.sql:ro
+    
+  gamecat-backend:
+    build: ./backend
+    image: gamecat-back-image
+    container_name: gamecat-back-container
+    ports:
+      - "3000:3000"
+    depends_on:
+      - gamecat-db
+  gamecat-frontend:
+    build: ./frontend
+    image: gamecat-front-image
+    container_name: gamecat-front-container 
+    ports:
+      - "5173:5173"
+    depends_on:
+      - gamecat-backend
