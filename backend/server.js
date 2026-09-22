@@ -9,17 +9,17 @@ app.use(express.json())
 app.use(cors())
 
 const conexao = mysql.createPool({
-    // estruturar a conexão com o BD
+    host: root,
+    user: adm,
+    password: 12345,
+    database: gamescat
 })
 
-app.get("/", (req, res) => {
-
-})
-
-app.get("/:id", (req, res) => {
-    
+app.get("/games", async (req, res) => {
+    const [games] = await conexao.query("SELECT * FROM produto")
+    res.json(games)
 })
 
 app.listen(PORT, () => {
-
+    console.log(`Servidor rodando em http://localhost:${PORT}`)
 })
