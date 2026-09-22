@@ -9,10 +9,10 @@ app.use(express.json())
 app.use(cors())
 
 const conexao = mysql.createPool({
-    host: root,
-    user: adm,
-    password: 12345,
-    database: gamescat
+    host: "gamecat",
+    user: "adm",
+    password: "12345",
+    database: "gamescat"
 })
 
 app.get("/games", async (req, res) => {
