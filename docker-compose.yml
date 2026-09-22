@@ -30,6 +30,5 @@ services:
     depends_on:
       - gamecat-backend
 
-
 volumes:
   meus_dados:
