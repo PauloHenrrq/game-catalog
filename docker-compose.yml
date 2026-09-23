@@ -3,10 +3,10 @@ services:
     image: mysql:8.4
     container_name: gamecat-banco
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: adm
-      MYSQL_PASSWORD: 12345
-      MYSQL_DATABASE: gamescat
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
     ports:
       - "3306:3306"
     volumes:
@@ -19,6 +19,13 @@ services:
     container_name: gamecat-back-container
     ports:
       - "3000:3000"
+    environment:
+      HOST: gamecat-db
+      USER: ${MYSQL_USER}
+      PASSWORD: ${MYSQL_PASSWORD}
+      DATABASE: ${MYSQL_DATABASE}
+})
+
     depends_on:
       - gamecat-db
   gamecat-frontend:
