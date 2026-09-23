@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(cors())
 
 const conexao = mysql.createPool({
-    host: "gamecat",
+    host: "gamecat-db",
     user: "adm",
     password: "12345",
     database: "gamescat"
